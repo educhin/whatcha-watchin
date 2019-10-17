@@ -25,4 +25,13 @@ class UsersController < ApplicationController
     end
   end
 
+  get '/login' do
+   if !logged_in?
+     erb :'users/login'
+   else
+     # fix this below
+     redirect to '/some_link'
+   end
+ end
+
 end
