@@ -1,0 +1,10 @@
+
+<p> Welcome, <%= current_user.username %>
+<h2> What You're wathcing... </h2>
+
+<% @shows.each do |show| %>
+<div>
+  <%= show.name %>
+  <%= show.genre %>
+</div>
+<% end %>
