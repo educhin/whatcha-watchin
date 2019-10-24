@@ -41,7 +41,7 @@ class ShowsController < ApplicationController
       end
     end
 
-    get 'shows/:id/edit' do
+    get '/shows/:id/edit' do
       if logged_in?
         @show = Show.find(params[:id])
         if @show && @show.user == current_user
