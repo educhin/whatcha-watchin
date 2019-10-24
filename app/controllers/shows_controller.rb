@@ -9,10 +9,6 @@ class ShowsController < ApplicationController
       end
     end
 
-    get '/shows/:user_slug' do
-
-    end
-
     get '/shows/new' do
       if logged_in?
         erb :'shows/add_show'
@@ -30,6 +26,7 @@ class ShowsController < ApplicationController
       else
         redirect to '/shows/new'
       end
+      redirect to '/myshows'
     end
 
     get 'shows/:id/edit' do
@@ -41,6 +38,10 @@ class ShowsController < ApplicationController
     end
 
     delete '/shows/:id/delete' do
+
+    end
+
+    get '/shows/:user_slug' do
 
     end
 end

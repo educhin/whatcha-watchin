@@ -40,7 +40,7 @@ class UsersController < ApplicationController
    if user && user.authenticate(params[:password])
      session[:user_id] = user.id
      # fix this below
-     redirect to '/some_link'
+     redirect to '/myshows'
    else
      redirect to '/signup'
    end
