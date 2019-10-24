@@ -30,11 +30,37 @@ class ShowsController < ApplicationController
     end
 
     get 'shows/:id/edit' do
-
+      if logged_in?
+        @show = Show.find_by_id(params[:id])
+        if @show && @show.user == current_user
+          erb :'shows/edit_show'
+        else
+          redirect to '/myshows'
+        end
+      else
+        redirect to '/login'
+      end
     end
 
     patch '/shows/:id' do
-
+      if logged_in?
+        if params[:name] == "" && params[:genre] == ""
+          redirect to "/shows/#{params[:id]}/edit"
+        else
+          @show = Show.find_by_id(params[:id])
+          if @show && @show.user == current_user
+            if @show.update(params[:show])
+              redirect to "/myshows"
+            else
+              redirect to "/shows/#{@show.id}/edit"
+            end
+          else
+            redirect to '/users/show'
+          end
+        end
+      else
+        redirect to '/login'
+      end
     end
 
     delete '/shows/:id/delete' do
