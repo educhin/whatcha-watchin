@@ -1,6 +1,8 @@
 class ShowsController < ApplicationController
     get '/myshows' do
       if logged_in? && current_user
+        @user = User.find(session[:user_id])
+        @shows = Show.all.select{ |show| show.user_id == @user.id}
         erb :'shows/user_shows', locals: {message: "Please login before viewing this page"}
       else
         # fix this below
@@ -18,20 +20,30 @@ class ShowsController < ApplicationController
     end
 
     post '/shows' do
-      if params[:name] != "" && params[:genre] != ""
+      if params[:show][:name] != "" && params[:show][:genre] != ""
         @user = User.find(session[:user_id])
         @show = Show.new(params[:show])
         @show.user_id = @user.id
         @show.save
+        redirect to '/myshows'
       else
         redirect to '/shows/new'
       end
-      redirect to '/myshows'
+
+    end
+
+    get '/shows/:id' do
+      if logged_in?
+        @show = Show.find(params[:id])
+        erb :'shows/display_show'
+      else
+        redirect to '/login'
+      end
     end
 
     get 'shows/:id/edit' do
       if logged_in?
-        @show = Show.find_by_id(params[:id])
+        @show = Show.find(params[:id])
         if @show && @show.user == current_user
           erb :'shows/edit_show'
         else
