@@ -1,0 +1,8 @@
+<h2> Edit Show </h2>
+
+<form method="post" action="/shows/<%=@show.id%>">
+  <input id="hidden" type="hidden" name="_method" value="PATCH">
+  <input type="text" name="content" value="<%= @show.name %>">
+  <input type="text" name="content" value="<%= @show.genre %>">
+  <input type="submit" value="Edit Show">
+</form>
