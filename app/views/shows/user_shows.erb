@@ -7,5 +7,10 @@
   Show: <%= show.name %>
   Genre: <%= show.genre %>
   <a href="/shows/<%= show.id %>/edit">Edit</a>
+    <form method="post" action="/shows/<%= show.id %>">
+    <input type="hidden" name="_method" value="delete" />
+    <input type="submit" value="Delete" />
+  </form>
 </div>
 <% end %>
+<a href="/shows/new">Watching something? Add a show here</a>

@@ -22,7 +22,7 @@ class UsersController < ApplicationController
       @user.save
       session[:user_id] = @user.id
       # fix this below
-      redirect to '/some_link'
+      redirect to '/myshows'
     end
   end
 
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
      erb :'users/login'
    else
      # fix this below
-     redirect to '/some_link'
+     redirect to '/myshows'
    end
  end
 
