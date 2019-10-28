@@ -2,12 +2,11 @@ class ShowsController < ApplicationController
     get '/myshows' do
       if logged_in? && current_user
         @user = User.find(session[:user_id])
+        @all_users = User.all.select{ |user| user != @user}
         @shows = Show.all.select{ |show| show.user_id == @user.id}
         erb :'shows/user_shows', locals: {message: "Please login before viewing this page"}
       else
-        # fix this below
         redirect to '/login'
-
       end
     end
 
@@ -89,7 +88,10 @@ class ShowsController < ApplicationController
       end
     end
 
-    get '/shows/:user_slug' do
-
+    get '/shows/:user_slug/display' do
+      @user = User.find_by_slug(params[:user_slug])
+      @all_users = User.all.select{ |user| user.slug != @user.slug}
+      @shows = Show.all.select{ |show| show.user_id == @user.id}
+      erb :'shows/show_by_user'
     end
 end

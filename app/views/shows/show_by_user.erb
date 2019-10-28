@@ -1,0 +1,17 @@
+<h2> What <%= @user.username %> is watching... </h2>
+
+<% @shows.each do |show| %>
+<div>
+  Show: <%= show.name %>
+  Genre: <%= show.genre %>
+</div>
+<% end %>
+<a href="/shows/new">Something catch your eye? Add a show to your list</a>
+
+<h3> What everyone else is watching... </h3>
+<h4> Users </h4>
+<% @all_users.each do |user| %>
+<div>
+  <a href="/shows/<%= user.username %>/display"><%= user.username %></a>
+</div>
+<% end %>

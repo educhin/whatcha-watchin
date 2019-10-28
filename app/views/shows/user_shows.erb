@@ -14,3 +14,11 @@
 </div>
 <% end %>
 <a href="/shows/new">Watching something? Add a show here</a>
+
+<h3> What everyone else is watching... </h3>
+<h4> Users </h4>
+<% @all_users.each do |user| %>
+<div>
+  <a href="/shows/<%= user.username %>/display"><%= user.username %></a>
+</div>
+<% end %>
