@@ -19,6 +19,6 @@
 <h4> Users </h4>
 <% @all_users.each do |user| %>
 <div>
-  <a href="/shows/<%= user.username %>/display"><%= user.username %></a>
+  <a href="/shows/<%= user.slug %>/display"><%= user.username %></a>
 </div>
 <% end %>
