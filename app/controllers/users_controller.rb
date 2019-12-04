@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  get '/users/:slug' do
-    @user = User.find_by_slug(params[:slug])
-    erb :'users/show'
+  get '/myprofile' do
+    if logged_in? && current_user
+      @user = User.find(session[:user_id])
+      # @all_users = User.all.select{ |user| user != @user}
+      # @shows = Show.all.select{ |show| show.user_id == @user.id}
+      erb :'users/show', locals: {message: "Please login before viewing this page"}
+    else
+      redirect to '/myshows'
+    end
   end
 
   get '/signup' do
