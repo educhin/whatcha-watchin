@@ -65,4 +65,18 @@ class UsersController < ApplicationController
       redirect to '/'
     end
   end
+
+  # get '/users/:id' do
+  #   redirect
+  # end
+
+  delete '/users/:id' do
+    if logged_in? && current_user
+      @user = User.find(session[:user_id])
+      @user.delete
+      redirect to '/signup'
+    else
+      redirect to '/login'
+    end
+  end
 end
