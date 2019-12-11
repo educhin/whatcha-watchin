@@ -20,7 +20,9 @@ class UsersController < ApplicationController
   end
 
 # add method for signup post route to ensure duplicate usernames/emails do not exist in the DB
-  post '/signup' do
+
+###### Change below to post/users/new
+  post '/users/new' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
     else
