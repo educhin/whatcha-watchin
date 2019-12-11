@@ -24,8 +24,10 @@ class UsersController < ApplicationController
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
     else
-      user = User.find_by(:username => params[:username])
-      if user
+      user1 = User.find_by(:username => params[:username])
+      user2 = User.find_by(:email => params[:email])
+      if user1 || user2
+        #How can we show an error here to let the user know that name is taken?
         redirect to '/signup'
       else
         @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
