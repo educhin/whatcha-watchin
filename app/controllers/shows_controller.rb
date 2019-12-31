@@ -90,7 +90,7 @@ class ShowsController < ApplicationController
 
     get '/shows/:user_slug/display' do
       @user = User.find_by_slug(params[:user_slug])
-      @all_users = User.all.select{ |user| user.slug != @user.slug}
+      @all_users = User.all.select{ |user| user.slug != @user.slug && user.slug != current_user.slug}
       @shows = Show.all.select{ |show| show.user_id == @user.id}
       erb :'shows/show_by_user'
     end
