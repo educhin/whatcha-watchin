@@ -4,7 +4,7 @@ class UsersController < ApplicationController
       @user = User.find(session[:user_id])
       # @all_users = User.all.select{ |user| user != @user}
       # @shows = Show.all.select{ |show| show.user_id == @user.id}
-      erb :'users/show', locals: {message: "Please login before viewing this page"}
+      erb :'users/show'
     else
       redirect to '/myshows'
     end
@@ -12,10 +12,9 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-      erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+      erb :'users/create_user'
     else
-      # fix this below
-      redirect to '/some_link'
+      redirect to '/myprofile'
     end
   end
 
@@ -30,7 +29,7 @@ class UsersController < ApplicationController
       user2 = User.find_by(:email => params[:email])
       if user1 || user2
         #How can we show an error here to let the user know that name is taken?
-        redirect to '/signup'
+        redirect to '/signup', locals: {message: "Username/Email address is taken"}
       else
         @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
         @user.save
