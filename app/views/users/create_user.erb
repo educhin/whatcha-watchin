@@ -8,9 +8,9 @@
 
 <h3>Sign Up</h3>
 <form action="/users/new" method="POST">
-  <p>Name: <input type="text" name="username"></p>
-  <p>Email: <input type="text" name="email"></p>
-  <p>Password: <input type="text" name="password"></p>
+  <p>Username: <input type="text" name="username" pattern="[a-zA-Z0-9]+" minlength="5" maxlength="12" required></p>
+  <p>Email: <input type="email" name="email" pattern="/\A([\w+\-].?)+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i" required></p>
+  <p>Password: <input type="text" name="password" minlength="8"required></p>
   <input class="btn btn-primary" type="submit">
 </form>
 
