@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   get '/myprofile' do
     if logged_in? && current_user
       @user = User.find(session[:user_id])
-      # @all_users = User.all.select{ |user| user != @user}
-      # @shows = Show.all.select{ |show| show.user_id == @user.id}
       erb :'users/show'
     else
       redirect to '/myshows'
@@ -18,9 +16,6 @@ class UsersController < ApplicationController
     end
   end
 
-# add method for signup post route to ensure duplicate usernames/emails do not exist in the DB
-
-###### Change below to post/users/new
   post '/users/new' do
     if params[:username] == "" || params[:email] == "" || params[:password] == ""
       redirect to '/signup'
@@ -34,7 +29,6 @@ class UsersController < ApplicationController
         @user = User.new(:username => params[:username], :email => params[:email], :password => params[:password])
         @user.save
         session[:user_id] = @user.id
-        # fix this below
         redirect to '/myshows'
       end
     end
@@ -44,7 +38,6 @@ class UsersController < ApplicationController
    if !logged_in?
      erb :'users/login'
    else
-     # fix this below
      redirect to '/myshows'
    end
  end
@@ -53,7 +46,6 @@ class UsersController < ApplicationController
    user = User.find_by(:username => params[:username])
    if user && user.authenticate(params[:password])
      session[:user_id] = user.id
-     # fix this below
      redirect to '/myshows'
    else
      redirect to '/signup'
@@ -68,10 +60,6 @@ class UsersController < ApplicationController
       redirect to '/'
     end
   end
-
-  # get '/users/:id' do
-  #   redirect
-  # end
 
   delete '/users/:id' do
     if logged_in? && current_user
